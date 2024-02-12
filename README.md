@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# SkyPro Avito
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Финальный результат этого проекта — реализация сайта онлайн объявлений, аналогичного "Авито".
 
-## Available Scripts
+## Функциональность
 
-In the project directory, you can run:
+  Для НЕ зарегистрированого пользователя:
+* Вывод списка всех объявлений.
+* Пользователь имеет возможность авторизации и регистрации на сайте.
+* Просмотр отзывов о товаре.
+* Просмотр профиля продавца.
+* Отображение подробной информации о товаре.
+* Возможность поиска товаров по ключевым словам.
+* Может получать номер телефона продавца.
 
-### `npm start`
+Для зарегистрированого пользователя:
+* Смена имени, фамилии, города, телефона, аватарки.
+* Добавление/удаление/редактрование объявления.
+* Возможность оставлять комментарии под объявлениями.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Технологии
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* React
+* Styled components
+* Redux
+* RTK Query
+* HTML
 
-### `npm test`
+## Установка и запуск
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Клонируйте репозиторий на свой компьютер: git clone <URL репозитория>
+2. Перейдите в корневую папку проекта: cd <название папки>
+3. Установите зависимости: npm install
+4. Запустите приложение: npm start
+5. Откройте http://localhost:3000 в браузере, чтобы увидеть ваше приложение.
 
-### `npm run build`
+### Запуск базы данных
+1. Для запуска бэкенда вам потребуется установить [Docker](https://www.docker.com/).
+2. После установки перезагрузите компьютер.
+3. Запустите Docker с помощью ярлыка.
+4. Скачайте [архив](https://drive.google.com/file/d/1pFE-NRANTsWmQwTyURjHXuECMmoKCFjO/view) и разархивируйте его.
+5. Через терминал перейдите в разархивированную папку.
+6. Запустите в терминале команду:
+      docker-compose -f docker-compose-backend.yaml up -d
+8. После первого выполнения команды все образы подтянуться, но могут не запуститься, в этом случае повторно выполните команду:
+      docker-compose -f docker-compose-backend.yaml up -d
+10. После этого бэкенд и Swagger будут доступны по адресу http://localhost:8090/
+11. Чтобы остановить работу бэкенда выполните:
+      docker-compose down
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Скриншоты
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Главная страница
+![image](https://github.com/ushink/analogue-avito/assets/131166403/210ca3a3-269a-4e86-af1d-69dad2617f69)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Страница регистрации
+![image](https://github.com/ushink/analogue-avito/assets/131166403/e852e863-2d72-49d0-b9dd-7f5d37a27726)
 
-### `npm run eject`
+### Страница профиля
+![image](https://github.com/ushink/analogue-avito/assets/131166403/0b6a310f-e181-4764-a560-8f1d54b021eb)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Страница продавца
+![image](https://github.com/ushink/analogue-avito/assets/131166403/742e0ab5-6165-4283-b7fc-a2a5a21584e1)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Страница выбранного товара
+![image](https://github.com/ushink/analogue-avito/assets/131166403/0ba8465f-139c-47bc-9956-aba7b623998a)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Модальное окно комментариев
+![image](https://github.com/ushink/analogue-avito/assets/131166403/f1075f20-c59a-40e6-829d-15acac8c3e35)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Модальное окно добавления объявления
+![image](https://github.com/ushink/analogue-avito/assets/131166403/88b9ad3f-e61a-453b-81b9-6dd5dfdfbe3f)
