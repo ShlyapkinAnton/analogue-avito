@@ -9,6 +9,8 @@ import {
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { ChoiceFile } from '../choice-file/choice-file'
 import { DeleteFile } from '../delete-file/delete-file'
+import { Footer } from '../footer/footer'
+import { Menu } from '../menu/menu'
 
 export const AddNewAdv = () => {
   const [isMode, setMode] = useState(false)
@@ -98,11 +100,15 @@ export const AddNewAdv = () => {
   return (
     <S.Wrapper>
       <S.ContainerBg>
+        <Menu mode={true}/>
         <S.ModalBlock>
           <S.ModalContent>
-            <S.ModalTitle>
-              {isMode ? 'Редактировать объявление' : 'Новое объявление'}
-            </S.ModalTitle>
+            
+            <Link to={'/'}>
+              <S.ModalTitle>
+                {isMode ? 'Редактировать объявление' : 'Новое объявление'}
+              </S.ModalTitle>
+            </Link>
 
             <Link to={'/'}>
               <S.ModalButtonClose>
@@ -167,6 +173,7 @@ export const AddNewAdv = () => {
             </S.ModalFormNewArt>
           </S.ModalContent>
         </S.ModalBlock>
+        <Footer/>
       </S.ContainerBg>
     </S.Wrapper>
   )

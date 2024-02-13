@@ -16,7 +16,7 @@ export const Header = () => {
           ) : (
             <>
               <S.HeaderLogo>
-                <S.LogoMobLink>
+                <S.LogoMobLink to="/">
                   <S.LogoMobImg src="./img/logo-mob.png" alt="logo" />
                 </S.LogoMobLink>
               </S.HeaderLogo>

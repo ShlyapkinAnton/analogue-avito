@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { AppRoutes } from './routes'
 import { Provider } from 'react-redux'
 import { store } from './store/store'
-// import './App.css'
 
 export const App = () => {
   const [user, setUser] = useState(localStorage.getItem('auth') || null)

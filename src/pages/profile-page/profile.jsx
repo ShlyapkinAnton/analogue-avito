@@ -1,22 +1,43 @@
 import React, { useEffect, useState } from 'react'
-// import './profile.css'
 import * as S from './profile-styled.js'
 import { Header } from '../../components/header/header'
 import { Menu } from '../../components/menu/menu'
 import { Cards } from '../../components/cards/cards'
 import { ProfileIcon } from '../../components/profile-icon/icon'
 import { Footer } from '../../components/footer/footer'
-import { useGetUserQuery, useUpdateUserDataMutation } from '../../service/user.js'
+import {
+  useGetUserQuery,
+  useUpdateUserDataMutation,
+} from '../../service/user.js'
 import { useGetUserAdsQuery } from '../../service/ads.js'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 export const ProfilePage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { data: userData, isSuccess: isUserDataSuccess, isError: userIsError, isLoading: userIsLoading, } = useGetUserQuery()
-  const { data: userAds, isSuccess: isUserAdsSuccess, isError, isLoading, error: userError } = useGetUserAdsQuery()
-  const [ updateUserData, { data: updateData, isSuccess: isUpdateDataSuccess, error: updateDataError, isError: isUpdateDataError }] = useUpdateUserDataMutation()
+  const {
+    data: userData,
+    isSuccess: isUserDataSuccess,
+    isError: userIsError,
+    isLoading: userIsLoading,
+  } = useGetUserQuery()
+  const {
+    data: userAds,
+    isSuccess: isUserAdsSuccess,
+    isError,
+    isLoading,
+    error: userError,
+  } = useGetUserAdsQuery()
+  const [
+    updateUserData,
+    {
+      data: updateData,
+      isSuccess: isUpdateDataSuccess,
+      error: updateDataError,
+      isError: isUpdateDataError,
+    },
+  ] = useUpdateUserDataMutation()
 
   const [buttonActive, setButtonActive] = useState(true)
   const [name, setName] = useState(userData?.name)
@@ -27,7 +48,7 @@ export const ProfilePage = () => {
   const handelUpdateUser = async () => {
     setButtonActive(false)
     try {
-      await updateUserData({name, surname, city, phone})
+      await updateUserData({ name, surname, city, phone })
     } catch (error) {
       console.error(error.message)
     } finally {
@@ -41,37 +62,47 @@ export const ProfilePage = () => {
     navigate('/auth')
   }
 
-  // сделать обратотку ошибок 
+  // сделать обратотку ошибок
   useEffect(() => {
     if (isUserDataSuccess) {
-      console.log('user', userData)
+      // console.log('user', userData)
     }
     if (isUserAdsSuccess) {
-      console.log('ads', userAds)
+      // console.log('ads', userAds)
     }
     if (isUpdateDataSuccess) {
-      console.log('update', updateData)
+      // console.log('update', updateData)
     }
-  },[isUserDataSuccess, isUserAdsSuccess, isUpdateDataSuccess])
+  }, [isUserDataSuccess, isUserAdsSuccess, isUpdateDataSuccess])
 
   return (
     <S.Wrapper>
       <S.Container>
-        <Header mode={false} />
+        <Header mode={true} />
 
         <S.Main>
           <S.MainContainer>
-            <div className="main__center-block">
-              <Menu />
-
-              <S.MainH2>Здравствуйте, {userData?.name}!</S.MainH2>
+            <S.MainCenterBlock>
+            <Menu mode={false}/>
+              <Link to='/'>
+                <S.MainH2>Здравствуйте, {userData?.name}!</S.MainH2>
+              </Link>
 
               <S.MainProfile>
                 <S.ProfileContent>
                   <S.MainTitle>Настройки профиля</S.MainTitle>
 
                   <S.ProfileSettings>
-                    <ProfileIcon mode={true} src={userData?.avatar}/>
+
+                    <S.SellerImgMobBlock>
+                        <S.SellerImgMob>
+                          <a href="" target="_self">
+                            <S.SellerImgMobImg as="img" src={`http://localhost:8090/${userData?.avatar}`} alt="" />
+                          </a>
+                        </S.SellerImgMob>
+                    </S.SellerImgMobBlock>
+
+                    <ProfileIcon mode={true} src={userData?.avatar} />
 
                     <S.SettingsRight>
                       <S.SettingsForm onSubmit={handelUpdateUser} action="#">
@@ -86,7 +117,8 @@ export const ProfilePage = () => {
                             defaultValue={userData?.name}
                             placeholder=""
                             onChange={(event) => {
-                              setName(event.target.value); setButtonActive(false)
+                              setName(event.target.value)
+                              setButtonActive(false)
                             }}
                           />
                         </S.SettingsDiv>
@@ -102,7 +134,8 @@ export const ProfilePage = () => {
                             defaultValue={userData?.surname}
                             placeholder=""
                             onChange={(event) => {
-                              setSurname(event.target.value); setButtonActive(false)
+                              setSurname(event.target.value)
+                              setButtonActive(false)
                             }}
                           />
                         </S.SettingsDiv>
@@ -118,7 +151,8 @@ export const ProfilePage = () => {
                             defaultValue={userData?.city}
                             placeholder=""
                             onChange={(event) => {
-                              setCity(event.target.value); setButtonActive(false)
+                              setCity(event.target.value)
+                              setButtonActive(false)
                             }}
                           />
                         </S.SettingsDiv>
@@ -134,15 +168,25 @@ export const ProfilePage = () => {
                             defaultValue={userData?.phone}
                             placeholder="+79161234567"
                             onChange={(event) => {
-                              setPhone(event.target.value); setButtonActive(false)
+                              setPhone(event.target.value)
+                              setButtonActive(false)
                             }}
                           />
                         </S.SettingsDiv>
 
-                        <S.SettingsButton onClick={() => {handelUpdateUser()}} disabled={buttonActive}>
+                        <S.SettingsButton
+                          onClick={() => {
+                            handelUpdateUser()
+                          }}
+                          disabled={buttonActive}
+                        >
                           Сохранить
                         </S.SettingsButton>
-                        <S.SettingsButton onClick={() => {handelLogout()}}>
+                        <S.SettingsButton
+                          onClick={() => {
+                            handelLogout()
+                          }}
+                        >
                           Выйти
                         </S.SettingsButton>
                       </S.SettingsForm>
@@ -152,7 +196,7 @@ export const ProfilePage = () => {
               </S.MainProfile>
 
               <S.MainTitle>Мои товары</S.MainTitle>
-            </div>
+            </S.MainCenterBlock>
 
             <S.MainContent>
               {/* {userIsError && userIsError.data.detail} */}

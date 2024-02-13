@@ -52,7 +52,7 @@ export const baseQueryReauth = async (args, api, extraOptions) => {
   )
 
   console.debug('Результат запроса на обновление токена', { refreshResult })
-  if (!refreshResult?.data.access) { // !refreshResult.data.access
+  if (!refreshResult?.data.access) {
     return forceLogout()
   }
 

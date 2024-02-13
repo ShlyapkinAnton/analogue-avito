@@ -19,7 +19,6 @@ export const ProfileIcon = ({ mode, src }) => {
     handelUpload(event.target.files[0])
   }
 
-// подмена клика
   const handelPick = () => {
     fileAvatar.current.click()
   }

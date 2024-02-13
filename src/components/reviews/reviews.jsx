@@ -3,6 +3,8 @@ import * as S from './reviews-styled'
 import { useGetCommentsQuery, usePostCommentsMutation } from '../../service/ads'
 import { DateBlockRev } from '../utils/date-block'
 import { useState } from 'react'
+import { Footer } from '../footer/footer'
+import { Menu } from '../menu/menu'
 
 export const Reviews = () => {
   const navigate = useNavigate()
@@ -10,7 +12,8 @@ export const Reviews = () => {
   const { data, isError, isLoading } = useGetCommentsQuery(id)
 
   const [reviews, setReviews] = useState('')
-  const [comment, { isError: isCommentError, error: commentError }] = usePostCommentsMutation()
+  const [comment, { isError: isCommentError, error: commentError }] =
+    usePostCommentsMutation()
   const userData = localStorage.getItem('auth') ?? null
 
   const handelPost = async (event) => {
@@ -31,9 +34,12 @@ export const Reviews = () => {
   return (
     <S.Wrapper>
       <S.ContainerBg>
+        <Menu mode={true} />
         <S.ModalBlock>
           <S.ModalContent>
-            <S.ModalTitle>Отзывы о товаре</S.ModalTitle>
+            <Link to={`/adv/${id}`}>
+              <S.ModalTitle>Отзывы о товаре</S.ModalTitle>
+            </Link>
 
             <Link to={`/adv/${id}`}>
               <S.ModalButtonClose>
@@ -55,10 +61,7 @@ export const Reviews = () => {
                       setReviews(event.target.value)
                     }}
                   ></S.FormNewArtTextarea>
-                  <S.FormNewArtButton
-                    type="submit"
-                    disabled={!userData}
-                  >
+                  <S.FormNewArtButton type="submit" disabled={!userData}>
                     Опубликовать
                   </S.FormNewArtButton>
                 </S.FormNewArtBlock>
@@ -96,6 +99,7 @@ export const Reviews = () => {
             </S.ModalScroll>
           </S.ModalContent>
         </S.ModalBlock>
+        <Footer />
       </S.ContainerBg>
     </S.Wrapper>
   )

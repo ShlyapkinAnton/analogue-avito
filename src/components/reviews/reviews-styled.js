@@ -20,6 +20,14 @@ export const ModalBlock = styled.div`
   left: calc(50% - (800px / 2));
   top: 60px;
   opacity: 1;
+
+  @media (max-width: 600px) {
+    position: absolute;
+    z-index: 5;
+    left: 0px;
+    top: 55px;
+    opacity: 1;
+  }
 `
 
 export const ModalContent = styled.div`
@@ -39,6 +47,23 @@ export const ModalContent = styled.div`
   background-color: #ffffff;
   border-radius: 12px;
   position: relative;
+
+  @media (max-width: 600px) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    width: 100%;
+    min-width: 320px;
+    height: auto;
+    padding: 30px 20px 30px;
+  }
 `
 
 export const ModalTitle = styled.h3`
@@ -47,6 +72,29 @@ export const ModalTitle = styled.h3`
   font-weight: 500;
   color: #000000;
   margin-bottom: 15px;
+
+  @media (max-width: 600px) {
+    font-size: 24px;
+    line-height: 29px;
+    padding: 0 0 0 26px;
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 12px;
+      height: 12px;
+      background-color: transparent;
+      border-top: 2px solid #000000;
+      border-left: 2px solid #000000;
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      position: absolute;
+      top: 9px;
+      left: 0;
+      cursor: pointer;
+    }
+  }
 `
 
 export const ModalButtonClose = styled.div`
@@ -94,6 +142,10 @@ export const ModalButtonCloseLine = styled.div`
   &:hover::before {
     background-color: #0080c1;
   }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 `
 
 export const ModalScroll = styled.div`
@@ -135,6 +187,10 @@ export const ModalFormNewArt = styled.div`
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
+
+  @media (max-width: 600px) {
+    margin-top: 22px;
+  }
 `
 
 export const FormNewArtBlock = styled.form`
@@ -147,6 +203,18 @@ export const FormNewArtBlock = styled.form`
   -ms-flex-direction: column;
   flex-direction: column;
   gap: 14px;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
 `
 
 export const FormNewArtLabel = styled.label`
@@ -154,6 +222,10 @@ export const FormNewArtLabel = styled.label`
   line-height: 32px;
   font-weight: 600;
   color: #000000;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 `
 
 export const FormNewArtTextarea = styled.textarea`
@@ -203,6 +275,39 @@ export const FormNewArtTextarea = styled.textarea`
     line-height: 24px;
     color: #0000004d;
   }
+
+  @media (max-width: 600px) {
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    max-height: 107px;
+    padding: 9px 17px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    font-size: 16px;
+    line-height: 1;
+
+    &::-webkit-input-placeholder {
+      font-size: 14px;
+      line-height: 21px;
+      color: #c4c4c4;
+    }
+    &:-ms-input-placeholder {
+      font-size: 14px;
+      line-height: 21px;
+      color: #c4c4c4;
+    }
+    &::-ms-input-placeholder {
+      font-size: 14px;
+      line-height: 21px;
+      color: #c4c4c4;
+    }
+    &::placeholder {
+      font-size: 14px;
+      line-height: 21px;
+      color: #c4c4c4;
+    }
+  }
 `
 
 export const FormNewArtButton = styled.button`
@@ -218,11 +323,18 @@ export const FormNewArtButton = styled.button`
   &:hover {
     background-color: #0080c1;
   }
+
+  @media (max-width: 600px) {
+    margin-top: 0px;
+    width: 100%;
+    height: 46px;
+    background-color: #009ee4;
+  }
 `
 
 export const ModalReviews = styled.div`
   width: 100%;
-  height: 495px;
+  height: 445px;
 `
 
 export const ReviewsReview = styled.div`
@@ -234,7 +346,6 @@ export const ReviewsReview = styled.div`
   align-items: center;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  // justify-content: center;
   margin: 15px 0;
 `
 
@@ -282,6 +393,12 @@ export const FontT = styled.p`
   line-height: 32px;
   color: #000000;
   font-weight: 400;
+
+  @media (max-width: 600px) {
+    font-size: 14px;
+    line-height: 28px;
+    color: #000000;
+  }
 `
 
 export const ReviewName = styled(FontT)`

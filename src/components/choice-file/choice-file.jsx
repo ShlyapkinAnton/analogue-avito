@@ -59,8 +59,6 @@ export const ChoiceFile = ({ image, setImage }) => {
 
   return (
     <S.FormNewArtBlock>
-      {' '}
-      ChoiceFile
       <input
         id="imgAds"
         type="file"

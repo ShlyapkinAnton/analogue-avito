@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-// import './profile.css'
+import { Link, useParams } from 'react-router-dom'
 import * as S from '../../pages/profile-page/profile-styled'
 import { Header } from '../../components/header/header'
 import { Menu } from '../../components/menu/menu'
@@ -22,7 +21,7 @@ export const SellerProfilePage = () => {
     if (data) {
       setSeller(
         data.filter((item) => {
-          return item.id == id // id seller
+          return item.id == id 
         })[0],
       )
     }
@@ -30,14 +29,14 @@ export const SellerProfilePage = () => {
 
   const [showTel, setShowTel] = useState(false)
 
-  const allAds = useSelector(allAdsSelector) // после перезагрузки страницы стейт обнуляется 
+  const allAds = useSelector(allAdsSelector) // после перезагрузки страницы стейт обнуляется
   const [sellerAds, setSellerAds] = useState([])
   useEffect(() => {
     if (allAds) {
       setSellerAds(
         allAds.filter((item) => {
           return item.user_id == id
-        })
+        }),
       )
     }
   }, [allAds])
@@ -49,10 +48,12 @@ export const SellerProfilePage = () => {
 
         <S.Main>
           <S.MainContainer>
-            <div className="main__center-block">
-              <Menu />
+            <S.MainCenterBlock>
+            <Menu mode={false}/>
 
-              <S.MainH2>Профиль продавца</S.MainH2>
+              <Link to={`/adv/${id}`}>
+                <S.MainH2>Профиль продавца</S.MainH2>
+              </Link>
 
               <S.MainProfile>
                 <S.ProfileContent>
@@ -68,13 +69,13 @@ export const SellerProfilePage = () => {
                         Продает товары с {DateBlockSell(seller?.sells_from)}
                       </S.SellerText>
 
-                      {/* <div class="seller__img-mob-block">
-                      <div class="seller__img-mob">
-                        <a href="" target="_self">
-                          <img src="#" alt="">
-                        </a>
-                      </div>
-                    </div> */}
+                      <S.SellerImgMobBlock>
+                        <S.SellerImgMob>
+                          <a href="" target="_self">
+                            <S.SellerImgMobImg as="img" src={`http://localhost:8090/${seller?.avatar}`} alt="" />
+                          </a>
+                        </S.SellerImgMob>
+                      </S.SellerImgMobBlock>
 
                       <ArticleButtonBlock
                         mode={true}
@@ -88,7 +89,7 @@ export const SellerProfilePage = () => {
               </S.MainProfile>
 
               <S.MainTitle>Товары продавца</S.MainTitle>
-            </div>
+            </S.MainCenterBlock>
 
             <S.MainContent>
               <S.Cards>

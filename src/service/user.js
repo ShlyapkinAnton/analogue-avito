@@ -52,27 +52,6 @@ export const userQuery = createApi({
       invalidatesTags: [{ type: 'user', id: 'LIST' }],
     }),
 
-    // обновить данные пользователя
-    // updateUser: build.mutation({
-    //   query: ({ ...patch }) => ({
-    //     url: `/user`,
-    //     method: 'PATCH',
-    //     body: patch,
-    //   }),
-    //   async onQueryStarted({ ...patch }, { dispatch, queryFulfilled }) {
-    //     const patchResult = dispatch(
-    //       userApi.util.updateQueryData('getUser', (draft) => {
-    //         Object.assign(draft, patch)
-    //       }),
-    //     )
-    //     try {
-    //       await queryFulfilled
-    //     } catch {
-    //       patchResult.undo()
-    //     }
-    //   },
-    // }),
-
     updateUserData: build.mutation({
       query: (body) => ({
         url: '/user',

@@ -8,7 +8,6 @@ import { SellerProfilePage } from './pages/seller-profile-page/seller-profile'
 import { AuthPage } from './pages/auth-page/auth'
 import { AddNewAdv } from './components/add-new-adv/add-new-adv'
 import { Reviews } from './components/reviews/reviews'
-// import { Layout } from './components/Layout'
 
 export function AppRoutes({ user, setUser }) {
   return (
@@ -20,7 +19,6 @@ export function AppRoutes({ user, setUser }) {
       <Route path="/reviews/:id" element={<Reviews />} />
 
       <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
-        {/* <Route path="/" element={<Layout />}> */}
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/my-adv" element={<MyAdvPage />} />
         <Route path="/add-new-adv/:id" element={<AddNewAdv />} />
