@@ -6,7 +6,9 @@ import { setAuth } from '../../store/slices/auth'
 import {
   useLoginMutation,
   useRegistrationMutation,
-} from '../../service/auth.js'
+} from '../../service/auth'
+import { Menu } from '../../components/menu/menu'
+import { Footer } from '../../components/footer/footer'
 
 export const AuthPage = ({ setUser }) => {
   const [isLoginMode, setIsLoginMode] = useState(true)
@@ -113,6 +115,7 @@ export const AuthPage = ({ setUser }) => {
   return (
     <S.Wrapper>
       <S.ContainerEnter>
+        <Menu mode={true}/>
         {isLoginMode ? (
           <S.ModalBlock>
             <S.ModalFormLogin action="#">
@@ -259,6 +262,7 @@ export const AuthPage = ({ setUser }) => {
             </S.ModalFormReg>
           </S.ModalBlockReg>
         )}
+        <Footer/>
       </S.ContainerEnter>
     </S.Wrapper>
   )

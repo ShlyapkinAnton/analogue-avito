@@ -12,6 +12,10 @@ export const SettingsLeft = styled.div`
   -ms-flex-align: center;
   align-items: center;
   margin-right: 43px;
+
+  @media (max-width: 620px) {
+    display: none;
+  }
 `
 
 export const Img = styled.img`
@@ -41,7 +45,6 @@ export const SettingsChangePhoto = styled.a`
   color: #009ee4;
 `
 
-//
 export const SettingsInput = styled.input`
   opacity: 0;
   visibility: hidden;

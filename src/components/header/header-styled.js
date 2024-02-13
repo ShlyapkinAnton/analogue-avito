@@ -1,7 +1,12 @@
+import { NavLink } from 'react-router-dom'
 import { styled } from 'styled-components'
 
 export const Header = styled.header`
   background-color: #009ee4;
+
+  @media (max-width: 590px) {
+    display: none;
+  }
 `
 
 export const HeaderNav = styled.nav`
@@ -27,8 +32,6 @@ export const ButtonHover = styled.button`
   }
 `
 
-// v1
-
 export const HeaderButton = styled(ButtonHover)`
   width: 224px;
   height: 40px;
@@ -40,13 +43,15 @@ export const HeaderButton = styled(ButtonHover)`
   line-height: 1;
 `
 
-// v2
-
 export const HeaderLogo = styled.div`
   display: none;
+
+  @media (max-width: 590px) {
+    display: flex;
+  }
 `
 
-export const LogoMobLink = styled.a`
+export const LogoMobLink = styled(NavLink)`
   display: block;
   width: 32px;
   height: 32px;

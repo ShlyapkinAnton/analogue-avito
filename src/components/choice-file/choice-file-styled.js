@@ -10,6 +10,18 @@ export const FormNewArtBlock = styled.div`
   -ms-flex-direction: column;
   flex-direction: column;
   margin-bottom: 20px;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 18px;
+  }
 `
 
 export const FormNewArtText = styled.p`
@@ -17,11 +29,23 @@ export const FormNewArtText = styled.p`
   line-height: 24px;
   color: #000000;
   margin-bottom: 10px;
+
+  @media (max-width: 600px) {
+    font-size: 14px;
+    line-height: 21px;
+    margin-bottom: 10px;
+  }
 `
 
 export const FormNewArtSpan = styled(FormNewArtText)`
   margin-left: 10px;
   color: rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 600px) {
+    display: block;
+    margin-left: 0px;
+    color: rgba(0, 0, 0, 0.3);
+  }
 `
 
 export const FormNewArtBarImg = styled.div`
@@ -41,6 +65,25 @@ export const FormNewArtBarImg = styled.div`
   justify-content: flex-start;
   margin-bottom: 10px;
   overflow: hidden;
+
+  @media (max-width: 600px) {
+    width: 278px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: start;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
 `
 
 export const FormNewArtImg = styled.div`
@@ -57,6 +100,14 @@ export const FormNewArtImg = styled.div`
   &:active {
     background-color: #eceaea;
   }
+
+  @media (max-width: 600px) {
+    display: block;
+    width: 90px;
+    min-width: 90px;
+    height: 90px;
+    background-color: #f0f0f0;
+  }
 `
 export const FormNewArtImgDel = styled.div`
   width: 90px;
@@ -72,6 +123,14 @@ export const FormNewArtImgDel = styled.div`
   &:active {
     background-color: #eceaea;
   }
+
+  @media (max-width: 600px) {
+    display: block;
+    width: 90px;
+    min-width: 90px;
+    height: 90px;
+    background-color: #f0f0f0;
+  }
 `
 
 export const FormNewArtImage = styled(FormNewArtImg)`
@@ -81,6 +140,14 @@ export const FormNewArtImage = styled(FormNewArtImg)`
   -o-object-fit: cover;
   object-fit: cover;
   z-index: 2;
+
+  @media (max-width: 600px) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
 `
 
 export const FormNewArtImageDel = styled(FormNewArtImgDel)`
@@ -90,6 +157,14 @@ export const FormNewArtImageDel = styled(FormNewArtImgDel)`
   -o-object-fit: cover;
   object-fit: cover;
   z-index: 2;
+
+  @media (max-width: 600px) {
+    display: block;
+    width: 90px;
+    min-width: 90px;
+    height: 90px;
+    background-color: #f0f0f0;
+  }
 `
 
 export const FormNewArtImgCover = styled.div`

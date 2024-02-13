@@ -1,7 +1,7 @@
 import React from 'react'
 import * as S from '../../pages/adv-page/adv-styled'
 import { Header } from '../../components/header/header'
-import { Menu } from '../../components/menu/menu'
+import { Search } from '../../components/search/search'
 import { ArticleButtonBlock } from '../../components/article-button-block/article-button-block'
 import { Footer } from '../../components/footer/footer'
 
@@ -13,7 +13,6 @@ export function MyAdvPage() {
 
         <S.Main>
           <S.MainContainer>
-            <Menu />
           </S.MainContainer>
 
           <S.MainArtic>

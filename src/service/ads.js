@@ -38,7 +38,6 @@ export const adsQuery = createApi({
       }),
       providesTags: [{ type: 'favAds' }],
     }),
-    //
     postTextAds: build.mutation({
       query: ({ title, description, price }) => ({
         url: `/adstext`,

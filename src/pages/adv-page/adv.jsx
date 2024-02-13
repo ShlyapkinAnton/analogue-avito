@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import './adv.css'
 import * as S from './adv-styled.js'
 import { Header } from '../../components/header/header'
 import { Menu } from '../../components/menu/menu'
@@ -8,7 +7,7 @@ import { Footer } from '../../components/footer/footer'
 import { Link, useParams } from 'react-router-dom'
 import { useGetAdsQuery, useGetCommentsQuery } from '../../service/ads'
 import { DateBlock, DateBlockSell } from '../../components/utils/date-block'
-import { getComments } from '../../components/utils/comment.js'
+import { getComments } from '../../components/utils/comment'
 
 export function AdvPage() {
   const [errorFetch, setErrorFetch] = useState(null)
@@ -54,7 +53,7 @@ export function AdvPage() {
             {errorFetch}
             <S.ArticContent>
               <S.ArticleLeft>
-                <S.ArticleFillImg>
+                <S.ArticleFillImg to='/'>
                   <S.ArticleImg>
                     <S.Img
                       as="img"

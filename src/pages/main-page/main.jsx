@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// import './main.css'
 import * as S from './main-styled.js'
 import { Header } from '../../components/header/header'
 import { Search } from '../../components/search/search'
