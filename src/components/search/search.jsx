@@ -1,6 +1,6 @@
+import * as S from './search-styled'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import * as S from './search-styled'
 import { setFilterAds } from '../../store/slices/ads'
 
 export const Search = () => {
@@ -35,7 +35,7 @@ export const Search = () => {
           placeholder="Поиск"
           name="search-mob"
           onChange={(event) => {
-            setSearch(event.target.value)
+            dispatch(setFilterAds({ search: event.target.value }))
           }}
         />
         <S.SearchButton type="submit">Найти</S.SearchButton>

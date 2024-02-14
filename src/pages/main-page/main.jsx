@@ -6,8 +6,11 @@ import { Search } from '../../components/search/search'
 import { Cards } from '../../components/cards/cards'
 import { Footer } from '../../components/footer/footer'
 import { useGetAllAdsQuery } from '../../service/ads.js'
-import { setAllAds } from '../../store/slices/ads.js'
-import { allAdsSelector, filterAdsSelector, } from '../../store/selectors/selector.js'
+import { setAllAds, setFilterAds } from '../../store/slices/ads.js'
+import {
+  allAdsSelector,
+  filterAdsSelector,
+} from '../../store/selectors/selector.js'
 
 export function MainPage() {
   const dispatch = useDispatch()
@@ -30,7 +33,9 @@ export function MainPage() {
       setErrorFetch('Не удалось загрузить объявления, попробуйте позже')
     }
   }, [data, isError])
-  
+
+  const handelClick = () => {dispatch(setFilterAds({ search: '' }))}
+
   return (
     <S.Wrapper>
       <S.Container>
@@ -40,7 +45,7 @@ export function MainPage() {
           <Search/>
 
           <S.MainContainer>
-            <S.MainH2>Объявления</S.MainH2>
+            <S.MainH2 onClick={() => {handelClick()}} >Объявления</S.MainH2>
 
             <S.MainContent>
               {errorFetch}
