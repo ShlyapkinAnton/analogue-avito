@@ -8,6 +8,7 @@ import { SellerProfilePage } from './pages/seller-profile-page/seller-profile'
 import { AuthPage } from './pages/auth-page/auth'
 import { AddNewAdv } from './components/add-new-adv/add-new-adv'
 import { Reviews } from './components/reviews/reviews'
+import { UpdatePasswordPage } from './components/update-password/update-password'
 
 export function AppRoutes({ user, setUser }) {
   return (
@@ -22,6 +23,7 @@ export function AppRoutes({ user, setUser }) {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/my-adv" element={<MyAdvPage />} />
         <Route path="/add-new-adv/:id" element={<AddNewAdv />} />
+        <Route path="/update-password" element={<UpdatePasswordPage />} />
       </Route>
     </Routes>
   )

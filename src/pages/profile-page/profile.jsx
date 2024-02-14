@@ -182,6 +182,11 @@ export const ProfilePage = () => {
                         >
                           Сохранить
                         </S.SettingsButton>
+
+                        <Link to='/update-password'>
+                          <S.SettingsButton>Сменить пароль</S.SettingsButton>
+                        </Link>
+
                         <S.SettingsButton
                           onClick={() => {
                             handelLogout()

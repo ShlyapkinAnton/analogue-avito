@@ -63,6 +63,18 @@ export const userQuery = createApi({
         invalidatesTags: [{ type: 'user', id: 'LIST' }],
       }),
     }),
+
+    updateUserPassword: build.mutation({
+      query: ({ oldPassword, newPassword }) => ({
+        url: '/user/password',
+        method: 'PUT',
+        body: JSON.stringify({ password_1: oldPassword, password_2: newPassword }),
+        headers: {
+          'content-type': 'application/json',
+        },
+        invalidatesTags: [{ type: 'user', id: 'LIST' }],
+      }),
+    }),
   }),
 })
 
@@ -71,4 +83,5 @@ export const {
   useGetUsersAllQuery,
   usePostAvatarMutation,
   useUpdateUserDataMutation,
+  useUpdateUserPasswordMutation,
 } = userQuery
