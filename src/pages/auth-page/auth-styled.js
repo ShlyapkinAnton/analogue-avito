@@ -184,7 +184,7 @@ export const ModalButtonEnter = styled.button`
   height: 52px;
   background-color: #009ee4;
   border-radius: 6px;
-  margin-top: 60px;
+  margin-top: 43px;
   margin-bottom: 20px;
   border: none;
   display: -webkit-box;
@@ -338,4 +338,15 @@ export const ModalButtonSignUpEntLink = styled(ModalButtonSignUpLink)`
     font-size: 16px;
     line-height: 24px;
   }
+`
+
+export const ErrorBlock = styled.div`
+  color: red;
+  // padding-bottom: 17px;
+  height: 17px;
+
+  // @media (max-width: 768px) {
+  //   font-size: 16px;
+  //   line-height: 24px;
+  // }
 `

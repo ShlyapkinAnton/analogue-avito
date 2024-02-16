@@ -160,7 +160,6 @@ export const SearchButton = styled.button`
     background-color: #0080c1;
   }
 
-  //> Не работает кнопка поиска
   @media (max-width: 590px) {
     display: none;
   }

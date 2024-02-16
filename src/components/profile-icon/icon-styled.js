@@ -59,3 +59,14 @@ export const SettingsChangePhotoButton = styled.div`
   line-height: 24px;
   color: #009ee4;
 `
+
+export const ErrorBlock = styled.div`
+  color: red;
+  // padding-bottom: 17px;
+  height: 17px;
+
+  // @media (max-width: 768px) {
+  //   font-size: 16px;
+  //   line-height: 24px;
+  // }
+`
