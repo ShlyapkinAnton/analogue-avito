@@ -13,27 +13,14 @@ export const userQuery = createApi({
       query: () => ({
         url: '/user',
         method: 'GET',
-        providesTags: (result) => {
-          result
-            ? [
-                ...result.map(({ id }) => ({ type: 'user', id })),
-                { type: 'user', id: 'LIST' },
-              ]
-            : [{ type: 'user', id: 'LIST' }]
-        },
       }),
+      providesTags: [{ type: 'user' }],
     }),
 
     // получить всех пользователей
     getUsersAll: build.query({
       query: () => `/user/all`,
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ id }) => ({ type: 'user', id })),
-              { type: 'user', id: 'LIST' },
-            ]
-          : [{ type: 'user', id: 'LIST' }],
+      providesTags: [{ type: 'user' }],
     }),
 
     // добавить аватар пользователя
@@ -49,7 +36,7 @@ export const userQuery = createApi({
           body: formData,
         }
       },
-      invalidatesTags: [{ type: 'user', id: 'LIST' }],
+      invalidatesTags: [{ type: 'user' }],
     }),
 
     updateUserData: build.mutation({
@@ -60,8 +47,8 @@ export const userQuery = createApi({
         headers: {
           'content-type': 'application/json',
         },
-        invalidatesTags: [{ type: 'user', id: 'LIST' }],
       }),
+      invalidatesTags: [{ type: 'user' }],
     }),
 
     updateUserPassword: build.mutation({
@@ -72,7 +59,7 @@ export const userQuery = createApi({
         headers: {
           'content-type': 'application/json',
         },
-        invalidatesTags: [{ type: 'user', id: 'LIST' }],
+        invalidatesTags: [{ type: 'user' }],
       }),
     }),
   }),
