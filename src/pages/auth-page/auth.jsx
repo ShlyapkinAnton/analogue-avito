@@ -114,8 +114,7 @@ export const AuthPage = ({ setUser }) => {
       setUser(loginData)
       navigate('/profile', { replace: true })
     }
-    if (!isRegisterError && isRegisterSuccess) {
-      console.log(isRegisterError, isRegisterSuccess)
+    if (isRegisterSuccess) {
       localStorage.setItem('auth', JSON.stringify(registerData))
       dispatch(
         setAuth({
