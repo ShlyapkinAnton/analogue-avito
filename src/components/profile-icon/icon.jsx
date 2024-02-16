@@ -1,17 +1,19 @@
-import * as S from './icon-styled.js'
-import { useRef } from 'react'
+
+import { useRef, useState, useEffect } from 'react'
 import { usePostAvatarMutation } from '../../service/user.js'
+import * as S from './icon-styled.js'
 
 export const ProfileIcon = ({ mode, src }) => {
-  const [ postAvatar, { isError, error }] = usePostAvatarMutation()
+  const [error, setError] = useState('')
+  const [ postAvatar, { isError: isPostError, error: postError }] = usePostAvatarMutation()
   const fileAvatar = useRef(null)
 
   const handelUpload = async (file) => {
     try {
       await postAvatar(file).unwrap()
     } catch {
-      if (isError) {
-        console.error(error.data.detail)
+      if (error) {
+        console.error(error.message)
       }
     }
   }
@@ -22,6 +24,13 @@ export const ProfileIcon = ({ mode, src }) => {
   const handelPick = () => {
     fileAvatar.current.click()
   }
+
+  useEffect(() => {
+    if (isPostError) {
+      setError(postError.data.detail[0].msg ? postError.data.detail[0].msg : postError.data.detail)
+    }
+  }, [isPostError])
+
   return (
     <S.SettingsLeft>
       <S.SettingsInput id="inputAvatar" type="file" accept="image/*," ref={fileAvatar} onChange={handelChange}/>
@@ -31,6 +40,7 @@ export const ProfileIcon = ({ mode, src }) => {
         </S.A>
       </S.SettingsImg>
       {mode && <S.SettingsChangePhoto onClick={handelPick}>Заменить</S.SettingsChangePhoto>}
+      <S.ErrorBlock>{ error && `Ошибка: ${error}`}</S.ErrorBlock>
     </S.SettingsLeft>
   )
 }
