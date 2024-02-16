@@ -3,17 +3,14 @@ import * as S from './auth-styled.js'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setAuth } from '../../store/slices/auth'
-import {
-  useLoginMutation,
-  useRegistrationMutation,
-} from '../../service/auth'
+import { useLoginMutation, useRegistrationMutation } from '../../service/auth'
 import { Menu } from '../../components/menu/menu'
 import { Footer } from '../../components/footer/footer'
 
 export const AuthPage = ({ setUser }) => {
   const [isLoginMode, setIsLoginMode] = useState(true)
   const [buttonActive, setButtonActive] = useState(false)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
@@ -23,26 +20,50 @@ export const AuthPage = ({ setUser }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const [ login, { data: loginData, isSuccess: isLoginSuccess, error: loginError, isError: isLoginError }] = useLoginMutation()
-  const [ registration, { data: registerData, isSuccess: isRegisterSuccess, error: registerError, isError: isRegisterError }] = useRegistrationMutation()
+  const [
+    login,
+    {
+      data: loginData,
+      isSuccess: isLoginSuccess,
+      error: loginError,
+      isError: isLoginError,
+    },
+  ] = useLoginMutation()
+  const [
+    registration,
+    {
+      data: registerData,
+      isSuccess: isRegisterSuccess,
+      error: registerError,
+      isError: isRegisterError,
+    },
+  ] = useRegistrationMutation()
 
   const handleLogin = async ({ email, password }) => {
     if (!email || !password) {
-      setError('Заполните поле ввода')
+      setError('Заполните поля ввода')
       return
     }
     try {
       setButtonActive(true)
       await login({ email, password })
-      setError(null)
+      setError('')
     } catch (error) {
       console.error('Ошибка авторизации:', error.message)
-      console.error('Ошибка авторизации:', isLoginError && loginError)
       setError(error.message)
     } finally {
       setButtonActive(false)
     }
   }
+
+  useEffect(() => {
+    if (isLoginError) {
+      setError(loginError.data.detail[0].msg ? loginError.data.detail[0].msg : loginError.data.detail)
+    }
+    if (isRegisterError) {
+      setError(registerError.data.detail[0].msg ? registerError.data.detail[0].msg : registerError.data.detail)
+    }
+  }, [isLoginError, isRegisterError])
 
   const handleRegister = async ({
     email,
@@ -53,7 +74,7 @@ export const AuthPage = ({ setUser }) => {
     city,
   }) => {
     if (!email || !password || !repeatPassword) {
-      setError('Заполните поле ввода')
+      setError('Заполните поля ввода')
       return
     }
     if (password !== repeatPassword) {
@@ -62,12 +83,18 @@ export const AuthPage = ({ setUser }) => {
     }
     try {
       setButtonActive(true)
-      await registration({ firstName, lastName, city, email, password, role: 'user'})
-      setError(null)
+      await registration({
+        firstName,
+        lastName,
+        city,
+        email,
+        password,
+        role: 'user',
+      })
+      setError('')
       setIsLoginMode(true)
     } catch (error) {
       console.error('Ошибка авторизации:', error.message)
-      console.error('Ошибка авторизации:', isRegisterError && registerError)
       setError(error.message)
     } finally {
       setButtonActive(false)
@@ -87,7 +114,8 @@ export const AuthPage = ({ setUser }) => {
       setUser(loginData)
       navigate('/profile', { replace: true })
     }
-    if (isRegisterSuccess) {
+    if (!isRegisterError && isRegisterSuccess) {
+      console.log(isRegisterError, isRegisterSuccess)
       localStorage.setItem('auth', JSON.stringify(registerData))
       dispatch(
         setAuth({
@@ -102,20 +130,18 @@ export const AuthPage = ({ setUser }) => {
   }, [isLoginSuccess, isRegisterSuccess])
 
   useEffect(() => {
-    setError(null)
+    setError('')
   }, [
     isLoginMode,
     email,
     password,
-    repeatPassword, 
-    isLoginError,
-    isRegisterError,
+    repeatPassword,
   ])
 
   return (
     <S.Wrapper>
       <S.ContainerEnter>
-        <Menu mode={true}/>
+        <Menu mode={true} />
         {isLoginMode ? (
           <S.ModalBlock>
             <S.ModalFormLogin action="#">
@@ -130,7 +156,7 @@ export const AuthPage = ({ setUser }) => {
               </Link>
 
               <S.LoginInput
-                type="text"
+                type="email"
                 name="login"
                 placeholder="email"
                 value={email}
@@ -148,6 +174,8 @@ export const AuthPage = ({ setUser }) => {
                 }}
               />
 
+              <S.ErrorBlock>{ error && `Ошибка: ${error}`}</S.ErrorBlock>
+
               <S.ModalButtonEnter
                 disabled={buttonActive}
                 onClick={() => handleLogin({ email, password })}
@@ -162,7 +190,6 @@ export const AuthPage = ({ setUser }) => {
                   Зарегистрироваться
                 </S.ModalButtonSignUpLink>
               </S.ModalButtonSignUp>
-              {error}
             </S.ModalFormLogin>
           </S.ModalBlock>
         ) : (
@@ -179,9 +206,8 @@ export const AuthPage = ({ setUser }) => {
               </Link>
 
               <S.LoginInput
-                type="text"
+                type="email"
                 name="login"
-                id="loginReg"
                 placeholder="email"
                 value={email}
                 onChange={(event) => {
@@ -191,7 +217,6 @@ export const AuthPage = ({ setUser }) => {
               <S.LoginInput
                 type="password"
                 name="password"
-                id="passwordFirst"
                 placeholder="Пароль"
                 value={password}
                 onChange={(event) => {
@@ -201,7 +226,6 @@ export const AuthPage = ({ setUser }) => {
               <S.LoginInput
                 type="password"
                 name="password"
-                id="passwordSecond"
                 placeholder="Повторите пароль"
                 value={repeatPassword}
                 onChange={(event) => {
@@ -211,7 +235,6 @@ export const AuthPage = ({ setUser }) => {
               <S.LoginInput
                 type="text"
                 name="first-name"
-                id="first-name"
                 placeholder="Имя (необязательно)"
                 value={firstName}
                 onChange={(event) => {
@@ -221,7 +244,6 @@ export const AuthPage = ({ setUser }) => {
               <S.LoginInput
                 type="text"
                 name="last-name"
-                id="last-name"
                 placeholder="Фамилия (необязательно)"
                 value={lastName}
                 onChange={(event) => {
@@ -231,13 +253,14 @@ export const AuthPage = ({ setUser }) => {
               <S.ModalInput
                 type="text"
                 name="city"
-                id="city"
                 placeholder="Город (необязательно)"
                 value={city}
                 onChange={(event) => {
                   setCity(event.target.value)
                 }}
               />
+
+              <S.ErrorBlock>{ error && `Ошибка: ${error}`}</S.ErrorBlock>
 
               <S.ModalButtonSignUpEnt
                 disabled={buttonActive}
@@ -258,11 +281,10 @@ export const AuthPage = ({ setUser }) => {
                     : 'Зарегистрироваться'}
                 </S.ModalButtonEnterLink>
               </S.ModalButtonSignUpEnt>
-              {error}
             </S.ModalFormReg>
           </S.ModalBlockReg>
         )}
-        <Footer/>
+        <Footer />
       </S.ContainerEnter>
     </S.Wrapper>
   )
