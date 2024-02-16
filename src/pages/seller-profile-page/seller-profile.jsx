@@ -3,43 +3,33 @@ import { Link, useParams } from 'react-router-dom'
 import * as S from '../../pages/profile-page/profile-styled'
 import { Header } from '../../components/header/header'
 import { Menu } from '../../components/menu/menu'
-import { Cards } from '../../components/cards/cards'
+import { MemoCard } from '../../components/cards/cards'
 import { ProfileIcon } from '../../components/profile-icon/icon'
 import { Footer } from '../../components/footer/footer'
-import { useGetAllUserQuery } from '../../service/ads'
+import { useGetAllAdsQuery, useGetAllUserQuery } from '../../service/ads'
 import { ArticleButtonBlock } from '../../components/article-button-block/article-button-block'
 import { DateBlockSell } from '../../components/utils/date-block'
-import { useSelector } from 'react-redux'
-import { allAdsSelector } from '../../store/selectors/selector'
 
 export const SellerProfilePage = () => {
   const { id } = useParams()
   const { data, isError, isLoading } = useGetAllUserQuery()
   const [seller, setSeller] = useState([])
+  const { data: dataAllAds, isSuccess: isAllAdsSuccess } = useGetAllAdsQuery()
+  const [sellerAds, setSellerAds] = useState([])
 
   useEffect(() => {
     if (data) {
-      setSeller(
-        data.filter((item) => {
-          return item.id == id 
-        })[0],
-      )
+      const user = data.filter((item) => { return item.id == id })[0]
+      setSeller(user)
     }
   }, [data, isError])
 
-  const [showTel, setShowTel] = useState(false)
-
-  const allAds = useSelector(allAdsSelector) // после перезагрузки страницы стейт обнуляется
-  const [sellerAds, setSellerAds] = useState([])
   useEffect(() => {
-    if (allAds) {
-      setSellerAds(
-        allAds.filter((item) => {
-          return item.user_id == id
-        }),
-      )
-    }
-  }, [allAds])
+    if (isAllAdsSuccess) {
+      const allAds = dataAllAds.filter((item) => { return item.user_id == id} )
+      setSellerAds(allAds)
+    } 
+  }, [dataAllAds])
 
   return (
     <S.Wrapper>
@@ -78,10 +68,7 @@ export const SellerProfilePage = () => {
                       </S.SellerImgMobBlock>
 
                       <ArticleButtonBlock
-                        mode={true}
                         data={seller?.phone}
-                        showTel={showTel}
-                        setShowTel={setShowTel}
                       />
                     </S.SettingsRight>
                   </S.ProfileSettings>
@@ -96,7 +83,7 @@ export const SellerProfilePage = () => {
                 {sellerAds?.map(
                   ({ id, title, price, images, user, created_on }) => {
                     return (
-                      <Cards
+                      <MemoCard
                         id={id}
                         title={title}
                         price={price}
