@@ -1,8 +1,10 @@
-import * as S from './article-button-block-styled.js'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDeleteAdsMutation } from '../../service/ads.js'
+import { useDeleteAdsMutation } from '../../service/ads'
+import * as S from './article-button-block-styled'
 
-export const ArticleButtonBlock = ({ mode, data, showTel, setShowTel, id }) => {
+export const ArticleButtonBlock = ({ mode, data, id }) => {
+  const [showTel, setShowTel] = useState(false)
   const navigate = useNavigate()
   const tel = data ?? '+7 777 000 0000'
 

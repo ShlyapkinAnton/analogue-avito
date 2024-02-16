@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useGetAllAdsQuery } from '../../service/ads.js'
+import { setAllAds, setFilterAds } from '../../store/slices/ads.js'
+import { allAdsSelector, filterAdsSelector } from '../../store/selectors/selector.js'
 import * as S from './main-styled.js'
 import { Header } from '../../components/header/header'
 import { Search } from '../../components/search/search'
-import { Cards } from '../../components/cards/cards'
+import { MemoCard } from '../../components/cards/cards'
 import { Footer } from '../../components/footer/footer'
-import { useGetAllAdsQuery } from '../../service/ads.js'
-import { setAllAds, setFilterAds } from '../../store/slices/ads.js'
-import {
-  allAdsSelector,
-  filterAdsSelector,
-} from '../../store/selectors/selector.js'
 
 export function MainPage() {
   const dispatch = useDispatch()
@@ -45,14 +42,14 @@ export function MainPage() {
           <Search/>
 
           <S.MainContainer>
-            <S.MainH2 onClick={() => {handelClick()}} >Объявления</S.MainH2>
+            <S.MainH2 onClick={handelClick} >Объявления</S.MainH2>
 
             <S.MainContent>
               {errorFetch}
               <S.Cards >
                 {ads?.map(({ id, title, price, images, user, created_on }) => {
                   return (
-                    <Cards
+                    <MemoCard
                       id={id}
                       title={title}
                       price={price}

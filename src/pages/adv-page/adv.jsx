@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { useGetAdsQuery, useGetCommentsQuery } from '../../service/ads'
+import { DateBlock, DateBlockSell } from '../../components/utils/date-block'
+import { getComments } from '../../components/utils/comment'
 import * as S from './adv-styled.js'
 import { Header } from '../../components/header/header'
 import { Menu } from '../../components/menu/menu'
 import { ArticleButtonBlock } from '../../components/article-button-block/article-button-block'
 import { Footer } from '../../components/footer/footer'
-import { Link, useParams } from 'react-router-dom'
-import { useGetAdsQuery, useGetCommentsQuery } from '../../service/ads'
-import { DateBlock, DateBlockSell } from '../../components/utils/date-block'
-import { getComments } from '../../components/utils/comment'
 
 export function AdvPage() {
   const [errorFetch, setErrorFetch] = useState(null)
@@ -17,15 +17,15 @@ export function AdvPage() {
   const commData = useGetCommentsQuery(id)
 
   const [isUserAds, setUserAds] = useState(false)
-  const localUser = JSON.parse(localStorage.getItem('auth'))?.email.toLowerCase()
-  const emailId = data?.user?.email.toLowerCase()
+  const localUser = JSON.parse(localStorage.getItem('user'))?.id ?? ''
+  const emailId = data?.user_id
   useEffect(() => {
     if (localUser === emailId) {
       setUserAds(true)
     } else {
       setUserAds(false)
     }
-  },[localUser, emailId])
+  }, [localUser, emailId])
 
   useEffect(() => {
     if (data) {
@@ -36,8 +36,6 @@ export function AdvPage() {
       setErrorFetch('Не удалось загрузить объявления, попробуйте позже')
     }
   }, [data, isError])
-
-  const [showTel, setShowTel] = useState(false)
 
   return (
     <S.Wrapper>
@@ -53,7 +51,7 @@ export function AdvPage() {
             {errorFetch}
             <S.ArticContent>
               <S.ArticleLeft>
-                <S.ArticleFillImg to='/'>
+                <S.ArticleFillImg to="/">
                   <S.ArticleImg>
                     <S.Img
                       as="img"
@@ -151,8 +149,6 @@ export function AdvPage() {
                   <ArticleButtonBlock
                     mode={isUserAds}
                     data={ads?.user.phone}
-                    showTel={showTel}
-                    setShowTel={setShowTel}
                     id={id}
                   />
 

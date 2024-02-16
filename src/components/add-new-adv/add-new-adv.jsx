@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
-import * as S from './add-new-adv-styled'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
   useGetAdsQuery,
   usePostImgAdsMutation,
   usePostTextAdsMutation,
   useUpdateAdsMutation,
 } from '../../service/ads'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import * as S from './add-new-adv-styled'
 import { ChoiceFile } from '../choice-file/choice-file'
 import { DeleteFile } from '../delete-file/delete-file'
 import { Footer } from '../footer/footer'
@@ -23,7 +23,7 @@ export const AddNewAdv = () => {
   } = useGetAdsQuery(id)
   const [title, setTitle] = useState(getAds?.title)
   const [description, setDescription] = useState(getAds?.description)
-  const [price, setPrice] = useState(getAds?.price)
+  const [price, setPrice] = useState(getAds?.price ?? 0)
   const [image, setImage] = useState(getAds?.images)
   const [error, setError] = useState(null)
 
@@ -146,17 +146,16 @@ export const AddNewAdv = () => {
               </S.FormNewArtBlock>
 
               {getAds?.images.length > 0 ? (
-                <DeleteFile data={image} id={id}/>
-                ) : (
+                <DeleteFile data={image} id={id} />
+              ) : (
                 <ChoiceFile image={image} setImage={setImage} />
-                )
-              }
+              )}
 
               <S.FormNewArtBlockPrice>
                 <S.Label htmlFor="price">Цена</S.Label>
 
                 <S.FormNewArtInputPrice
-                  type="text"
+                  type="number"
                   name="price"
                   id="formName"
                   defaultValue={price}

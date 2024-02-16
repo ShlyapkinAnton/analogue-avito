@@ -1,9 +1,9 @@
+import { memo } from 'react'
 import { DateBlock } from '../utils/date-block'
 import * as S from './cards-styled.js'
 
-export const Cards = ({ id, title, price, images, date, user, isLoading }) => {
+const Cards = ({ id, title, price, images, date, user, isLoading }) => {
   const item = images.map((i) => i)
-
   return (
     <S.CardsItem to={`/adv/${id}`}>
       <S.CardsCard>
@@ -53,3 +53,7 @@ export const Cards = ({ id, title, price, images, date, user, isLoading }) => {
     </S.CardsItem>
   )
 }
+
+export const MemoCard = memo(Cards);
+
+
